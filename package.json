@@ -1,0 +1,23 @@
+{
+  "name": "learnings-node-unit-tsting",
+  "version": "1.0.0",
+  "description": "This repo is a scratchpad for the files and lessons learned from [Node Js Unit Testing]https://www.udemy.com/course/nodejs-unit-testing-in-depth) by Murtez Alrohani on Udemy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marlenebowles/learnings-node-unit-tsting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marlenebowles/learnings-node-unit-tsting/issues"
+  },
+  "homepage": "https://github.com/marlenebowles/learnings-node-unit-tsting#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.1"
+  }
+}
