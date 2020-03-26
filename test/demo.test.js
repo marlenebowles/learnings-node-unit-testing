@@ -1,5 +1,8 @@
 const chai = require('chai');
+const assert = chai.assert;
 const expect = chai.expect;
+const should = chai.should;
+
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const sinon = require('sinon');
@@ -7,78 +10,68 @@ const sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 const rewire = require('rewire');
 
-var demo = rewire('./demo');
+var demo = rewire('../lib/demo');
 
 describe('demo', () => {
-	context('add', () => {
-		it('should add two numbers', () => {
-			expect(demo.add(1, 2)).to.equal(3);
+	context('add function', () => {
+		it('should test add function', () => {
+			expect(demo.add(2, 3)).to.equal(5);
 		});
 	});
-
-	context('callback add', () => {
-		it('should test the callback', done => {
-			demo.addCallback(1, 2, (err, result) => {
+	context('test call function', () => {
+		it('should test callback function', done => {
+			demo.addCallback(2, 3, (err, result) => {
 				expect(err).to.not.exist;
-				expect(result).to.equal(3);
+				expect(result).to.equal(5);
 				done();
 			});
 		});
 	});
-
-	context('test promise', () => {
+	context('should test asynchronous code', () => {
 		it('should add with a promise cb', done => {
-			demo.addPromise(1, 2)
+			demo.addPromise(2, 3)
 				.then(result => {
-					expect(result).to.equal(3);
+					expect(result).to.equal(5);
 					done();
 				})
-				.catch(ex => {
-					console.log('caught error');
-					done(ex);
+				.catch(err => {
+					done(err);
 				});
 		});
+		it('should test ASYNC await', async () => {
+			let result = await demo.addPromise(1, 2);
+			expect(result).to.equal(3);
+		});
+		it('should test async with chai-as-promised', async () => {
+			await expect(demo.addPromise(1, 2)).to.eventually.equal(3);
+		});
 
-		it('should test a promise with return', () => {
+		it('should return a promise', () => {
 			return demo.addPromise(1, 2).then(result => {
 				expect(result).to.equal(3);
 			});
 		});
-
-		it('should test promise with async await', async () => {
-			let result = await demo.addPromise(1, 2);
-
-			expect(result).to.equal(3);
-		});
-
-		it('should test promise with chai as promised', async () => {
-			await expect(demo.addPromise(1, 2)).to.eventually.equal(3);
-		});
 	});
-
-	context('test doubles', () => {
-		it('should spy on log', () => {
+	context('test doubles/spy/stub', () => {
+		it('should only be called once', () => {
 			let spy = sinon.spy(console, 'log');
 			demo.foo();
-
 			expect(spy.calledOnce).to.be.true;
-			expect(spy).to.have.been.calledOnce;
+			expect(spy).to.be.calledOnce;
 			spy.restore();
 		});
-
-		it('should stub console.warn', () => {
+		it('should stub console warn', () => {
 			let stub = sinon.stub(console, 'warn').callsFake(() => {
+				// using callsFake and stubbing to make sure the function is invoked but not actually doing anything
 				console.log('message from stub');
 			});
-
 			demo.foo();
 			expect(stub).to.have.been.calledOnce;
-			expect(stub).to.have.been.calledWith('console.warn was called');
 			stub.restore();
 		});
 	});
-
-	context('stub private functions', () => {
+	context('test private code', () => {
+		// this example uses demo.bar which calls createFile(a promise) and callDB
 		it('should stub createFile', async () => {
 			let createStub = sinon
 				.stub(demo, 'createFile')

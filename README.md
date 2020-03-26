@@ -40,5 +40,14 @@ I learn by writing and blowing things up. All of my repositories that start with
     -   Context can help group beforeEAch and AfterEach. Can help with breaking things down and keeping things seperate
 -   DeepEqual
     -   When comparing objects always use deep.equal.
+-   Testing Callbacks and Aysnch code with Done
+    -   When testing callbacks or asynchronous code, use mocha done
+    -   call done() to terminate test and proceed to the next test
+    -   using chai-as-promised library can help more with async code
+-   Spys and Stubs with Sinon
+    -   Using spys to spy on parts of a function
+    -   Using stubs to stub out calls to a function we actually dont want to run (like saves to a db)
+-   Rewire for testing private code
+    -   Use rewire for testing private methods
 
 ## Follow Ups
