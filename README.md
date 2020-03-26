@@ -46,8 +46,16 @@ I learn by writing and blowing things up. All of my repositories that start with
     -   using chai-as-promised library can help more with async code
 -   Spys and Stubs with Sinon
     -   Using spys to spy on parts of a function
-    -   Using stubs to stub out calls to a function we actually dont want to run (like saves to a db)
+    -   Using stubs to stub out calls to a function we actually dont want to run (like saves to a db). for example use stubs to mongoose actions vs REST GET PUT DELETE
 -   Rewire for testing private code
     -   Use rewire for testing private methods
+-   SuperTest for testing api endpoints
+    -   Use supertest to send requests to endpoints
+-   TDD
+    -   writing tests before writing code, when writing code write minimum to make it pass
+    -   write more than one test case for function
+    -   test for nulls, what happens when you pass an array
 
 ## Follow Ups
+
+-   react unit testing
