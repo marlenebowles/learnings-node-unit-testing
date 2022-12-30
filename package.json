@@ -20,7 +20,7 @@
 		"chai": "^4.2.0",
 		"chai-as-promised": "^7.1.1",
 		"dotenv": "^8.2.0",
-		"mocha": "^7.1.1",
+		"mocha": "^10.2.0",
 		"mongoose": "^5.9.6"
 	},
 	"devDependencies": {
